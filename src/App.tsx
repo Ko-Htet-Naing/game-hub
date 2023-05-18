@@ -1,21 +1,27 @@
 import { Grid, GridItem, Hide, Show, useBreakpointValue } from '@chakra-ui/react';
 import Navbar from './Components/Navbar';
+import GameGrid from './Components/GameGrid';
+import { useColorMode } from '@chakra-ui/react';
 
 const App = () => {
+  const { colorMode } = useColorMode();
+
   return (
     <>
       <Grid templateAreas={{
         base: ` "nav" "main"`,
         lg: `"nav nav" "aside main"`
-      }} color='blackAlpha.700'>
+      }} color={colorMode === 'light' ? 'dark' : 'light'}>
         <GridItem area={'nav'}>
           <Navbar />
         </GridItem>
         <Show above='lg'>
-          <GridItem area={'aside'} bg='pink.300'>Aside</GridItem>
+          <GridItem area={'aside'}>Aside</GridItem>
         </Show>
 
-        <GridItem area={'main'} bg='green.300'>Main</GridItem>
+        <GridItem area={'main'}>
+          <GameGrid />
+        </GridItem>
       </Grid>
     </>
   )
