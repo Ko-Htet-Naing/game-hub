@@ -2,12 +2,20 @@ import React, { useEffect, useState } from 'react'
 import axiosInstance from '../services/api-client';
 import { SimpleGrid, Text } from '@chakra-ui/react';
 import GameCard from './GameCard';
+import DisplayIcons from './DisplayIcons';
+
+export interface PlatformFormat {
+    id: number;
+    name: string;
+    slug: string;
+}
 
 export interface GameOutput {
     id: number;
     rating: number;
     name: string;
     background_image: string;
+    parent_platforms: { platform: PlatformFormat }[];
 }
 
 interface FetchGamesFormat {
@@ -22,7 +30,7 @@ const GameGrid = () => {
     useEffect(() => {
         axiosInstance.get<FetchGamesFormat>('/games')
             .then(res => {
-                setGames(res.data.results)
+                setGames(res.data.results);
             })
             .catch(err => setErrors(err.message))
     }, [])
