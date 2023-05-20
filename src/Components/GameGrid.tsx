@@ -16,6 +16,7 @@ export interface GameOutput {
     name: string;
     background_image: string;
     parent_platforms: { platform: PlatformFormat }[];
+    metacritic: number;
 }
 
 interface FetchGamesFormat {
@@ -31,6 +32,7 @@ const GameGrid = () => {
         axiosInstance.get<FetchGamesFormat>('/games')
             .then(res => {
                 setGames(res.data.results);
+                console.log(res.data.results);
             })
             .catch(err => setErrors(err.message))
     }, [])
