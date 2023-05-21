@@ -1,41 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import axiosInstance from '../services/api-client';
 import { SimpleGrid, Text } from '@chakra-ui/react';
 import GameCard from './GameCard';
-import DisplayIcons from './DisplayIcons';
+import useFetch from '../hooks/useFetch';
 
-export interface PlatformFormat {
-    id: number;
-    name: string;
-    slug: string;
-}
-
-export interface GameOutput {
-    id: number;
-    rating: number;
-    name: string;
-    background_image: string;
-    parent_platforms: { platform: PlatformFormat }[];
-    metacritic: number;
-}
-
-interface FetchGamesFormat {
-    count: number;
-    results: GameOutput[];
-}
 
 const GameGrid = () => {
-    const [games, setGames] = useState<GameOutput[]>([]);
-    const [errors, setErrors] = useState('');
-
-    useEffect(() => {
-        axiosInstance.get<FetchGamesFormat>('/games')
-            .then(res => {
-                setGames(res.data.results);
-                console.log(res.data.results);
-            })
-            .catch(err => setErrors(err.message))
-    }, [])
+    const { errors, games } = useFetch();
     return (
         <>
             {errors && <Text> {errors} </Text>}
