@@ -1,8 +1,8 @@
 import CriticScore from "./CriticScore";
 import DisplayIcons from "./DisplayIcons";
-import { GameOutput } from "./GameGrid";
 import { CardBody, Card, Image, Heading, Text, HStack } from "@chakra-ui/react";
 import image_url from "../services/image-url";
+import { GameOutput } from "../hooks/useFetch";
 
 interface Props {
     game: GameOutput;
@@ -11,7 +11,7 @@ interface Props {
 const GameCard = ({ game }: Props) => {
     return (
         <>
-            <Card borderRadius={10} overflow="hidden">
+            <Card>
                 <Image src={image_url(game.background_image)} />
                 <CardBody>
                     <Heading fontSize="2xl"> {game.name} </Heading>

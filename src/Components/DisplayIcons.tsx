@@ -3,7 +3,7 @@ import { BsXbox, BsPlaystation, BsWindows, BsAndroid, BsGlobe, BsApple } from 'r
 import { DiLinux } from 'react-icons/di';
 import { SiNintendo } from 'react-icons/si';
 import { IconType } from 'react-icons';
-import { PlatformFormat } from './GameGrid';
+import { PlatformFormat } from '../hooks/useFetch';
 
 interface Props {
     platform: PlatformFormat[];
@@ -23,6 +23,7 @@ const DisplayIcons = ({ platform }: Props) => {
     return (
         <HStack marginY={1}>
             {platform.map(p => <Icon key={p.id} as={iconMap[p.slug]} color='gray.500' />)}
+
         </HStack>
     )
 }
