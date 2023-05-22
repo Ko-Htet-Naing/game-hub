@@ -6,7 +6,7 @@ import GameCardWrapper from "./GameCardWrapper";
 
 const GameGrid = () => {
     const { errors, games, isLoading } = useFetch();
-    const skeletons = [1, 2, 3, 4, 5, 6];
+    const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     return (
         <>
             {errors && <Text> {errors} </Text>}

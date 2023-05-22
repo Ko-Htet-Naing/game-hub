@@ -2,13 +2,14 @@ import { useEffect, useState } from "react";
 import axiosInstance from "../services/api-client";
 import { CanceledError } from "axios";
 
-interface Genres {
+export interface Genres {
   id: number;
   name: string;
   slug: string;
+  image_background: string;
 }
 
-interface FetchGenreFormat {
+export interface FetchGenreFormat {
   count: number;
   results: Genres[];
 }
