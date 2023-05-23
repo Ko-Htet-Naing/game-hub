@@ -1,4 +1,4 @@
-import { Grid, GridItem, Hide, Show, useBreakpointValue } from '@chakra-ui/react';
+import { Grid, GridItem, Show, Spinner } from '@chakra-ui/react';
 import Navbar from './Components/Navbar';
 import GameGrid from './Components/GameGrid';
 import { useColorMode } from '@chakra-ui/react';
