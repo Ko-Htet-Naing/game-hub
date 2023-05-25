@@ -6,6 +6,7 @@ import ShowGenreList from './Components/ShowGenreList';
 import './App.css';
 import { Genres } from './hooks/useGenre';
 import { useState } from 'react';
+import PlatformMenu from './Components/PlatformMenu';
 
 export interface GameQuery {
   genre: Genres | null;
@@ -36,6 +37,7 @@ const App = () => {
           </GridItem>
         </Show>
         <GridItem area={'main'}>
+          <PlatformMenu />
           <GameGrid gameQuery={gameQuery} />
         </GridItem>
       </Grid>
