@@ -4,8 +4,16 @@ import GameGrid from './Components/GameGrid';
 import { useColorMode } from '@chakra-ui/react';
 import ShowGenreList from './Components/ShowGenreList';
 import './App.css';
+import { Genres } from './hooks/useGenre';
+import { useState } from 'react';
+
+export interface GameQuery {
+  genre: Genres | null;
+}
 
 const App = () => {
+
+  const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
   const { colorMode } = useColorMode();
 
   return (
@@ -24,11 +32,11 @@ const App = () => {
         </GridItem>
         <Show above='lg'>
           <GridItem area={'aside'} paddingX={5}>
-            <ShowGenreList />
+            <ShowGenreList onSelectGenre={(genre) => setGameQuery({ ...gameQuery, genre })} />
           </GridItem>
         </Show>
         <GridItem area={'main'}>
-          <GameGrid />
+          <GameGrid gameQuery={gameQuery} />
         </GridItem>
       </Grid>
     </>

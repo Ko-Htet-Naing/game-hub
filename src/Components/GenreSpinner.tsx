@@ -1,4 +1,3 @@
-import useGenre from "../hooks/useGenre";
 import { Skeleton, Spinner, HStack, SkeletonText, Card } from "@chakra-ui/react";
 
 const GenreSpinner = () => {

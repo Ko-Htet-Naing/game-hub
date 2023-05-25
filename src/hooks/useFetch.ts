@@ -1,37 +1,21 @@
 import { useState, useEffect } from "react";
 import axiosInstance from "../services/api-client";
-import { CanceledError } from "axios";
+import { AxiosRequestConfig, CanceledError } from "axios";
+import { Genres } from "./useGenre";
 
-export interface PlatformFormat {
-  id: number;
-  name: string;
-  slug: string;
-}
-
-export interface GameOutput {
-  id: number;
-  rating: number;
-  name: string;
-  background_image: string;
-  parent_platforms: { platform: PlatformFormat }[];
-  metacritic: number;
-}
-
-interface FetchGamesFormat {
+interface FetchGamesFormat<T> {
   count: number;
-  results: GameOutput[];
+  results: T[];
 }
-
-const useFetch = () => {
-  const [games, setGames] = useState<GameOutput[]>([]);
+const useFetch = <T>(endPoint: string, requestConfig?: AxiosRequestConfig, dep?: any[]) => {
+  const [games, setGames] = useState<T[]>([]);
   const [errors, setErrors] = useState("");
   const [isLoading, setLoading] = useState(false);
-
   useEffect(() => {
     const controller = new AbortController();
     setLoading(true);
     axiosInstance
-      .get<FetchGamesFormat>("/games", { signal: controller.signal })
+      .get<FetchGamesFormat<T>>(endPoint, { signal: controller.signal, ...requestConfig })
       .then((res) => {
         setGames(res.data.results);
         setLoading(false);
@@ -42,7 +26,7 @@ const useFetch = () => {
         setLoading(false);
       });
     return () => controller.abort();
-  }, []);
+  }, dep ? [...dep] : []);
 
   return { games, errors, isLoading };
 };
