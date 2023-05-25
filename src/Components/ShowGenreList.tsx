@@ -5,9 +5,12 @@ import GenreSpinner from "./GenreSpinner";
 
 interface Props {
     onSelectGenre: (genre: Genres) => void;
+    selectedGenre: Genres | null;
 }
 
-const ShowGenreList = ({ onSelectGenre }: Props) => {
+const ShowGenreList = ({ onSelectGenre, selectedGenre }: Props) => {
+    let genreId: number = 0;
+    console.log(genreId)
     const { genres, isloading } = useGenre();
     const genre_control = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
     return (
@@ -24,10 +27,9 @@ const ShowGenreList = ({ onSelectGenre }: Props) => {
                         genres.map(genre =>
                             <HStack key={genre.id} paddingY="5px">
                                 <Image boxSize="30px" borderRadius="10px" src={image_url(genre.image_background)} />
-                                <Button display="block" variant="link" onClick={() => onSelectGenre(genre)}>{genre.name} </Button>
+                                <Button fontWeight={genre.id === selectedGenre?.id ? 'bold' : 'normal'} display="block" variant="link" onClick={() => onSelectGenre(genre)}>{genre.name} </Button>
                             </HStack>
                         )
-                        // ghost, link 
                     }
                 </ListItem>
             </List>
